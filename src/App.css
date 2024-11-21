@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.untilIunenroll {
+  background-color: blue;
+  padding: 10px 5px;
+  text-align: left;
+  color: white;
+}
+
+.textboxContainer {
+  position: relative;
+}
+
+.untilIunenrollTextbox {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+}
+
+input[type='text'] {
+  padding: 5px 10px
+}
