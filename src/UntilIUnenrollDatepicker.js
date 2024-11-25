@@ -1,6 +1,8 @@
-import { getMonth } from "date-fns";
 import { useRef, useState } from "react";
+
+import CalendarIcon from "./Calendar";
 import DatePicker from "react-datepicker";
+import { getMonth } from "date-fns";
 
 const months = [
   "January",
@@ -33,6 +35,7 @@ function UntilIUnenrollBanner(props) {
       <div className="untilIunenroll">
         <input
           type="checkbox"
+          name="untillIunenroll"
           onChange={(e) => {
             const value = e.currentTarget.checked;
             setChecked(value);
@@ -46,22 +49,34 @@ function UntilIUnenrollBanner(props) {
         style={{
           margin: 10,
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
         <button
+          type="button"
           onClick={props.decreaseMonth}
           disabled={props.prevMonthButtonDisabled}
+          className="react-datepicker__navigation react-datepicker__navigation--previous"
         >
-          {"<"}
+          <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--previous">
+            Previous Month
+          </span>
         </button>
-        {months[getMonth(props.date)]}
+        <h2 className="react-datepicker__current-month">
+          {months[getMonth(props.date)]}
+        </h2>
+
         <button
+          type="button"
           onClick={props.increaseMonth}
           disabled={props.nextMonthButtonDisabled}
+          className="react-datepicker__navigation react-datepicker__navigation--next"
+          aria-label="Next Month"
         >
-          {">"}
+          <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--next">
+            Next Month
+          </span>
         </button>
       </div>
     </>
@@ -98,10 +113,17 @@ function UntilIUnenrollDatepicker(props) {
     setIsUnenrollSelected(props.unEnrollSelected);
   };
 
+  const min = new Date(2000, 2, 10);
+  const max = new Date(2002, 2, 10);
+
   return (
     <DatePicker
       ref={calRef}
+      showIcon
+      icon={CalendarIcon}
       shouldCloseOnSelect={false}
+      minDate={min}
+      max={max}
       selected={startDate}
       value={getValueOfDatePicker()}
       onSelect={(date) => setInterimSelection(date)}

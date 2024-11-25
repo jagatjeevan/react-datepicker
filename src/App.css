@@ -39,6 +39,8 @@
 
 .untilIunenroll {
   background-color: blue;
+  border-top-left-radius: 0.3rem!important;
+  border-top-right-radius: 0.3rem!important;
   padding: 10px 5px;
   text-align: left;
   color: white;
@@ -56,4 +58,21 @@
 
 input[type='text'] {
   padding: 5px 10px
+}
+
+.react-datepicker-wrapper .react-datepicker__calendar-icon {
+  transform: scale(.8);
+  padding: 0.5rem 0.2rem !important;
+}
+
+.react-datepicker-wrapper .react-datepicker__view-calendar-icon input {
+  padding-left: 35px;
+}
+
+.react-datepicker__header {
+  padding-top: 0!important;
+}
+
+.react-datepicker__navigation {
+  top: 45px!important;
 }

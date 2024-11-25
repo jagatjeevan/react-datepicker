@@ -1,6 +1,7 @@
-import { getMonth } from "date-fns";
 import { useEffect, useRef, useState } from "react";
+
 import DatePicker from "react-datepicker";
+import { getMonth } from "date-fns";
 
 const months = [
   "January",
@@ -36,22 +37,34 @@ function CustomHeader(props) {
         style={{
           margin: 10,
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
         <button
+          type="button"
           onClick={props.decreaseMonth}
           disabled={props.prevMonthButtonDisabled}
+          className="react-datepicker__navigation react-datepicker__navigation--previous"
         >
-          {"<"}
+          <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--previous">
+            Previous Month
+          </span>
         </button>
-        {months[getMonth(props.date)]}
+        <h2 className="react-datepicker__current-month">
+          {months[getMonth(props.date)]}
+        </h2>
+
         <button
+          type="button"
           onClick={props.increaseMonth}
           disabled={props.nextMonthButtonDisabled}
+          className="react-datepicker__navigation react-datepicker__navigation--next"
+          aria-label="Next Month"
         >
-          {">"}
+          <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--next">
+            Next Month
+          </span>
         </button>
       </div>
     </>
@@ -70,6 +83,9 @@ function DatePickerComponent(props) {
     setStartDate(props.prevDate);
   }, [props.prevDate]);
 
+  const min = new Date(2000, 2, 10);
+  const max = new Date(2002, 2, 10);
+
   return (
     <div className="textboxContainer">
       <input
@@ -87,6 +103,8 @@ function DatePickerComponent(props) {
           setIsConfirmClicked(false);
         }}
         ref={calRef}
+        min={min}
+        max={max}
         selected={startDate}
         shouldCloseOnSelect={false}
         onChange={(date) => setStartDate(date)}
