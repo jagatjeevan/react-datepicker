@@ -113,8 +113,9 @@ function UntilIUnenrollDatepicker(props) {
     setIsUnenrollSelected(props.unEnrollSelected);
   };
 
-  const min = new Date(2000, 2, 10);
-  const max = new Date(2002, 2, 10);
+  const filterDate = (date) => {
+    return !interimUnenrollSelection;
+  };
 
   return (
     <DatePicker
@@ -122,11 +123,10 @@ function UntilIUnenrollDatepicker(props) {
       showIcon
       icon={CalendarIcon}
       shouldCloseOnSelect={false}
-      minDate={min}
-      max={max}
       selected={startDate}
       value={getValueOfDatePicker()}
       onSelect={(date) => setInterimSelection(date)}
+      filterDate={filterDate}
       renderCustomHeader={({
         date,
         changeYear,
@@ -142,8 +142,12 @@ function UntilIUnenrollDatepicker(props) {
           changeMonth={changeMonth}
           decreaseMonth={decreaseMonth}
           increaseMonth={increaseMonth}
-          prevMonthButtonDisabled={prevMonthButtonDisabled}
-          nextMonthButtonDisabled={nextMonthButtonDisabled}
+          prevMonthButtonDisabled={
+            interimUnenrollSelection ?? prevMonthButtonDisabled
+          }
+          nextMonthButtonDisabled={
+            interimUnenrollSelection ?? nextMonthButtonDisabled
+          }
           isUnenrollSelected={isUnenrollSelected}
           setInterimUnenrollSelection={setInterimUnenrollSelection}
         />

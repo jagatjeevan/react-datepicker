@@ -83,8 +83,8 @@ function DatePickerComponent(props) {
     setStartDate(props.prevDate);
   }, [props.prevDate]);
 
-  const min = new Date(2000, 2, 10);
-  const max = new Date(2002, 2, 10);
+  const min = isUnenrollSelected ? new Date() : new Date(2000, 2, 10);
+  const max = isUnenrollSelected ? new Date() : new Date(2002, 2, 10);
 
   return (
     <div className="textboxContainer">
@@ -125,12 +125,17 @@ function DatePickerComponent(props) {
             changeMonth={changeMonth}
             decreaseMonth={decreaseMonth}
             increaseMonth={increaseMonth}
-            prevMonthButtonDisabled={prevMonthButtonDisabled}
-            nextMonthButtonDisabled={nextMonthButtonDisabled}
+            prevMonthButtonDisabled={
+              isUnenrollSelected ?? prevMonthButtonDisabled
+            }
+            nextMonthButtonDisabled={
+              isUnenrollSelected ?? nextMonthButtonDisabled
+            }
           />
         )}
       >
         <div style={{ textAlign: "right" }}>
+          Disable or not {isUnenrollSelected}
           <button
             onClick={() => {
               setStartDate(props.prevDate);
