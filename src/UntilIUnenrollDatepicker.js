@@ -21,9 +21,17 @@ const months = [
 
 function ButtonGroup(props) {
   return (
-    <div style={{ textAlign: "right" }}>
-      <button onClick={props.onCancel}>Cancel</button>
-      <button onClick={props.onApply}>Apply</button>
+    <div style={{ clear: "both" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "row-reverse",
+        }}
+      >
+        <button onClick={props.onApply}>Apply</button>
+        <button onClick={props.onCancel}>Cancel</button>
+      </div>
     </div>
   );
 }
