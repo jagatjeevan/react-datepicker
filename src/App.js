@@ -1,15 +1,18 @@
 import "./App.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useState } from "react";
 import UntilIUnenrollDatepicker from "./UntilIUnenrollDatepicker";
+import { useState } from "react";
 
 function App() {
-  const [date, updateDate] = useState(new Date());
+  const estDate = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+  });
+
+  const [date, updateDate] = useState(estDate);
   const [unEnrollSelected, updateEnrollSelected] = useState(true);
 
   const handleDate = (date) => {
-    console.log("Date changed is ", date);
     updateDate(date);
   };
 

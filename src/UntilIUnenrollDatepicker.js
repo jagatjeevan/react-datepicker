@@ -96,7 +96,8 @@ function UntilIUnenrollDatepicker(props) {
   );
 
   const getValueOfDatePicker = () => {
-    return isUnenrollSelected ? "Until I unenroll" : startDate;
+    const datePart = startDate.split(", ")[0];
+    return isUnenrollSelected ? "Until I unenroll" : datePart;
   };
 
   const onApply = () => {
@@ -121,11 +122,18 @@ function UntilIUnenrollDatepicker(props) {
     <DatePicker
       ref={calRef}
       showIcon
+      dateFormat="YYYY-MM-DD"
       icon={CalendarIcon}
+      minDate={new Date()}
       shouldCloseOnSelect={false}
       selected={startDate}
       value={getValueOfDatePicker()}
-      onSelect={(date) => setInterimSelection(date)}
+      onSelect={(date) => {
+        const changedDate = date.toLocaleString("en-US", {
+          timeZone: "America/New_York",
+        });
+        setInterimSelection(changedDate);
+      }}
       filterDate={filterDate}
       renderCustomHeader={({
         date,
